@@ -8,7 +8,6 @@ import com.misri.weather.network.WeatherApiClient
 import com.misri.weather.network.data.WeatherResponse
 import com.misri.weather.util.kelvinToCelsius
 import com.misri.weather.util.meterToKmPerHour
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,11 +58,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun parseResponse(weatherResponse: WeatherResponse){
-        // TODO: fill the response into UI
-        binding.txtlat.text = "Latitude : ${weatherResponse.coord.lat}"
-        binding.txtlon.text = "Longitude : ${weatherResponse.coord.lon}"
-        binding.txtTemp.text = "Temparature : ${weatherResponse.main.temp.kelvinToCelsius()}°C"
-        binding.txtWind.text = "Wind : ${weatherResponse.wind.speed.meterToKmPerHour()}Km/h"
-        binding.txtHumidity.text = "Humidity : ${weatherResponse.main.humidity}%"
+        with(weatherResponse){
+            binding.txtlat.text = "Latitude : ${coord.lat}"
+            binding.txtlon.text = "Longitude : ${coord.lon}"
+            binding.txtTemp.text = "Temparature : ${main.temp.kelvinToCelsius()}°C"
+            binding.txtWind.text = "Wind : ${wind.speed.meterToKmPerHour()}Km/h"
+            binding.txtHumidity.text = "Humidity : ${main.humidity}%"
+        }
+
     }
 }
