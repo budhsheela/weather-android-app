@@ -21,15 +21,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSearch.setOnClickListener {
+
+            val city = binding.searchBar.text
+            if(city.isEmpty())
             Toast.makeText(this@MainActivity, "Searching weather city data..", Toast.LENGTH_SHORT).show()
-            callRetrofitApi()
+            else {
+                Toast.makeText(this@MainActivity, "Searching weather city data..", Toast.LENGTH_SHORT).show()
+                callRetrofitApi(city.toString())
+            }
         }
     }
 
-    fun callRetrofitApi() {
+    fun callRetrofitApi(city: String) {
         val weatherService = WeatherApiClient.client
 
-        val call = weatherService.getWeather("Azamgarh", WeatherApiClient.API_KEY)
+        val call = weatherService.getWeather(city, WeatherApiClient.API_KEY)
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,
@@ -37,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     val temperature = response.body()?.main?.temp
-                    binding.textView.text = "Api data: ${response.body()?.main}, ${response.body()?.name}, ${response.body()?.weather?.get(0)}"
+                    binding.textView.text = "Api data: ${response.body()}"
                 } else {
                     binding.textView.text = "Failed to fetch weather data"
                 }
