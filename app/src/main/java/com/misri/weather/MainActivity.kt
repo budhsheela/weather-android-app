@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.misri.weather.databinding.ActivityMainBinding
 import com.misri.weather.network.WeatherApiClient
 import com.misri.weather.network.data.WeatherResponse
+import com.misri.weather.util.kelvinToCelsius
+import com.misri.weather.util.meterToKmPerHour
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,16 +45,25 @@ class MainActivity : AppCompatActivity() {
                 response: Response<WeatherResponse>
             ) {
                 if (response.isSuccessful) {
-                    val temperature = response.body()?.main?.temp
-                    binding.textView.text = "Api data: ${response.body()}"
+                    val weatherResponse: WeatherResponse? =response.body()
+                    if(weatherResponse!=null) parseResponse(weatherResponse)
                 } else {
-                    binding.textView.text = "Failed to fetch weather data"
+                    Toast.makeText(this@MainActivity, "Failed to fetch weather data", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                binding.textView.text = "Failed to fetch weather data"
+                Toast.makeText(this@MainActivity, "Failed to fetch weather data", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    fun parseResponse(weatherResponse: WeatherResponse){
+        // TODO: fill the response into UI
+        binding.txtlat.text = "Latitude : ${weatherResponse.coord.lat}"
+        binding.txtlon.text = "Longitude : ${weatherResponse.coord.lon}"
+        binding.txtTemp.text = "Temparature : ${weatherResponse.main.temp.kelvinToCelsius()}°C"
+        binding.txtWind.text = "Wind : ${weatherResponse.wind.speed.meterToKmPerHour()}Km/h"
+        binding.txtHumidity.text = "Humidity : ${weatherResponse.main.humidity}%"
     }
 }
