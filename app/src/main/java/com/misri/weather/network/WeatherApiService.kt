@@ -1,5 +1,6 @@
 package com.misri.weather.network
 
+import com.misri.weather.network.data.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
