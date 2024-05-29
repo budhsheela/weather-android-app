@@ -2,18 +2,10 @@ package com.misri.weather
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.misri.weather.databinding.ActivityMainBinding
 import com.misri.weather.network.WeatherApiClient
-import com.misri.weather.network.WeatherData
-import com.misri.weather.network.WeatherResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.misri.weather.network.data.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,14 +29,6 @@ class MainActivity : AppCompatActivity() {
     fun callRetrofitApi() {
         val weatherService = WeatherApiClient.client
 
-//        // Replace "CityName" with the desired city
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val weatherData = weatherService.getWeather("London", WeatherApiClient.API_KEY)
-//            withContext(Dispatchers.Main) {
-//                updateUI(weatherData)
-//            }
-//        }
-
         val call = weatherService.getWeather("Azamgarh", WeatherApiClient.API_KEY)
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
@@ -52,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<WeatherResponse>
             ) {
                 if (response.isSuccessful) {
-                    val temperature = response.body()?.main?.temperature
+                    val temperature = response.body()?.main?.temp
                     binding.textView.text = "Api data: ${response.body()?.main}, ${response.body()?.name}, ${response.body()?.weather?.get(0)}"
                 } else {
                     binding.textView.text = "Failed to fetch weather data"
@@ -63,16 +47,5 @@ class MainActivity : AppCompatActivity() {
                 binding.textView.text = "Failed to fetch weather data"
             }
         })
-    }
-
-    private fun updateUI(weatherData: WeatherData) {
-
-        val sb = StringBuilder()
-        sb.append(weatherData.name).append("${weatherData.main.temp.toInt()}°C")
-            .append("icon path ${weatherData.weather[0].icon}")
-       // val iconUrl = "https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png"
-//        Glide.with(this)
-//            .load(iconUrl)
-//            .into(findViewById(R.id.imageViewWeatherIcon))
     }
 }
