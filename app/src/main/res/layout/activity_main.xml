@@ -67,6 +67,17 @@
         app:layout_constraintBottom_toTopOf="@+id/txtlat"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/txtCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/radius"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
+        />
         <TextView
             android:id="@+id/txtlat"
             android:layout_width="match_parent"
@@ -76,7 +87,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/radius"
             android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/btnSearch"
+            app:layout_constraintTop_toBottomOf="@+id/txtCity"
             />
         <TextView
             android:id="@+id/txtlon"
