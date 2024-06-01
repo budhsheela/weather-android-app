@@ -11,69 +11,127 @@
 
     <EditText
         android:id="@+id/searchBar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
-        android:hint="Enter city or pincode here"
-        android:background="@color/grey_search"
+        android:hint="Enter city e.g. Pune"
+        android:background="@drawable/radius"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+    <RadioGroup
+        android:id="@+id/rdSelectValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Select city or pincode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        android:weightSum="1"
+        android:gravity="center_horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rbcity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="serach by City"
+            android:layout_weight=".5"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/rbPincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="serach by Pincode"
+            />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginEnd="10dp"
+        android:padding="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
         android:text="Get Weather"
-        app:layout_constraintStart_toEndOf="@+id/searchBar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchBar"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBar"
-        android:textSize="20sp" />
+        app:layout_constraintTop_toBottomOf="@+id/rdSelectValue"
+        app:layout_constraintBottom_toTopOf="@+id/txtlat"
+        android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/txtCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/radius"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
+        />
         <TextView
             android:id="@+id/txtlat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:padding="10dp"
             android:layout_margin="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/btnSearch"
-            android:background="@color/white"
+            android:background="@drawable/radius"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtCity"
             />
         <TextView
             android:id="@+id/txtlon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:minHeight="40dp"
+            android:padding="10dp"
             app:layout_constraintTop_toBottomOf="@+id/txtlat"
-            android:background="@color/white"
+            android:background="@drawable/radius"
             />
         <TextView
             android:id="@+id/txtTemp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:minHeight="40dp"
+            android:padding="10dp"
             app:layout_constraintTop_toBottomOf="@+id/txtlon"
-            android:background="@color/white"
+            android:background="@drawable/radius"
             />
         <TextView
             android:id="@+id/txtWind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:minHeight="40dp"
+            android:padding="10dp"
             app:layout_constraintTop_toBottomOf="@+id/txtTemp"
-            android:background="@color/white"
+            android:background="@drawable/radius"
             />
         <TextView
             android:id="@+id/txtHumidity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:minHeight="40dp"
+            android:padding="10dp"
             app:layout_constraintTop_toBottomOf="@+id/txtWind"
-            android:background="@color/white"
+            android:background="@drawable/radius"
             />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
