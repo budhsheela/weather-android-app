@@ -22,6 +22,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.rdSelectValue.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rbcity -> {
+                    binding.searchBar.hint = "Enter city e.g. Pune"
+                    Toast.makeText(this@MainActivity, "City is selected", Toast.LENGTH_LONG).show()
+                }
+
+                R.id.rbPincode -> {
+                    binding.searchBar.hint = "Enter Pincode e.g. 411057"
+                    Toast.makeText(this@MainActivity, "Pincode is selected", Toast.LENGTH_LONG).show()
+                }
+
+
+            }
+        }
+
         binding.btnSearch.setOnClickListener {
 
             val city = binding.searchBar.text
